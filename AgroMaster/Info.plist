@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>AgroMaster uses Face ID to securely sign you in.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>AgroMaster needs camera access to scan plants for disease detection.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>AgroMaster uses your location to find nearby agricultural support centers.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Manrope-VariableFont_wght.ttf</string>
+		<string>Inter-VariableFont_opsz,wght.ttf</string>
+	</array>
+</dict>
+</plist>
