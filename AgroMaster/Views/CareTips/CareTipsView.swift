@@ -3,6 +3,9 @@ import SwiftUI
 // MARK: - Care Tips View
 
 struct CareTipsView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    @State private var showSettings = false
+
     var body: some View {
         ZStack {
             Color.appBackground.ignoresSafeArea()
@@ -16,6 +19,10 @@ struct CareTipsView: View {
                     Spacer(minLength: 32)
                 }
             }
+        }
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
+                .environmentObject(authViewModel)
         }
     }
 
@@ -38,13 +45,17 @@ struct CareTipsView: View {
 
                 Spacer()
 
-                ZStack {
-                    Circle()
-                        .fill(Color.lightGreenTint)
-                        .frame(width: 40, height: 40)
-                    Image(systemName: "person.fill")
-                        .font(.system(size: 16))
-                        .foregroundColor(.primaryGreen)
+                Button {
+                    showSettings = true
+                } label: {
+                    ZStack {
+                        Circle()
+                            .fill(Color.lightGreenTint)
+                            .frame(width: 40, height: 40)
+                        Image(systemName: "person.fill")
+                            .font(.system(size: 16))
+                            .foregroundColor(.primaryGreen)
+                    }
                 }
             }
             .padding(.horizontal, 20)
@@ -122,11 +133,11 @@ struct CareTipsView: View {
 
                 Spacer()
 
-                Text("Crop Rotation\nMastery Guide")
+                Text("Common Disease\nPrevention")
                     .font(.heading2Large)
                     .foregroundColor(.white)
 
-                Text("Maximize soil fertility and break pest cycles with strategic 4-season crop rotation planning for your fields.")
+                Text("Advanced strategies for plant longevity, disease prevention, and seasonal adaptation curated by our agricultural experts.")
                     .font(.bodySmall)
                     .foregroundColor(.white.opacity(0.85))
                     .lineSpacing(3)
@@ -142,42 +153,17 @@ struct CareTipsView: View {
     // MARK: - Secondary Tips Grid
 
     private var secondaryTipsGrid: some View {
-        let columns = [
-            GridItem(.flexible(), spacing: 14),
-            GridItem(.flexible(), spacing: 14)
-        ]
-
-        return LazyVGrid(columns: columns, spacing: 14) {
+        VStack(spacing: 14) {
             SecondaryTipCard(
                 icon: "drop.fill",
-                iconColor: .blue,
-                title: "Soil Health Fundamentals",
-                description: "Understand pH levels, organic matter content, and micronutrient balance for optimal crop growth.",
-                backgroundColor: Color(hex: "EEF4FF")
+                title: "Precision Irrigation",
+                description: "Saving watering techniques to prevent moisture mapping and rot in your crops."
             )
 
             SecondaryTipCard(
-                icon: "ladybug.fill",
-                iconColor: .alertRed,
-                title: "Integrated Pest Management",
-                description: "Combine biological controls, habitat manipulation, and resistant varieties to minimize crop damage.",
-                backgroundColor: Color.coral.opacity(0.4)
-            )
-
-            SecondaryTipCard(
-                icon: "humidity.fill",
-                iconColor: .secondaryGreen,
-                title: "Irrigation Efficiency",
-                description: "Drip irrigation and mulching techniques that reduce water usage by up to 40% while boosting yields.",
-                backgroundColor: Color.lightGreenTint.opacity(0.5)
-            )
-
-            SecondaryTipCard(
-                icon: "chart.line.uptrend.xyaxis",
-                iconColor: .accentBrown,
-                title: "Yield Optimization",
-                description: "Data-driven planting schedules, spacing strategies, and companion planting for maximum harvest.",
-                backgroundColor: Color.accentBrown.opacity(0.1)
+                icon: "leaf.circle.fill",
+                title: "Organic Nutrients",
+                description: "Natural compost blends for earth-rich soil amendments that boost yields."
             )
         }
         .padding(.horizontal, 20)
@@ -287,54 +273,53 @@ private struct TipCategoryPill: View {
 
 private struct SecondaryTipCard: View {
     let icon: String
-    let iconColor: Color
     let title: String
     let description: String
-    let backgroundColor: Color
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        HStack(alignment: .top, spacing: 16) {
             // Icon
             ZStack {
                 Circle()
-                    .fill(iconColor.opacity(0.15))
-                    .frame(width: 40, height: 40)
+                    .fill(Color.lightGreenTint)
+                    .frame(width: 44, height: 44)
                 Image(systemName: icon)
-                    .font(.system(size: 17))
-                    .foregroundColor(iconColor)
+                    .font(.system(size: 18, weight: .semibold))
+                    .foregroundColor(.primaryGreen)
             }
 
-            Text(title)
-                .font(.heading3)
-                .foregroundColor(.textPrimary)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+            VStack(alignment: .leading, spacing: 8) {
+                Text(title)
+                    .font(.heading4)
+                    .foregroundColor(.textPrimary)
 
-            Text(description)
-                .font(.caption2)
-                .foregroundColor(.textSecondary)
-                .lineSpacing(2)
-                .lineLimit(4)
-                .fixedSize(horizontal: false, vertical: true)
+                Text(description)
+                    .font(.bodySmall)
+                    .foregroundColor(.textSecondary)
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                // Explore Guide link
+                Button {
+                    // TODO: open guide
+                } label: {
+                    HStack(spacing: 6) {
+                        Text("EXPLORE GUIDE")
+                            .font(.label)
+                            .tracking(1.5)
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 11, weight: .semibold))
+                    }
+                    .foregroundColor(.primaryGreen)
+                }
+                .padding(.top, 4)
+            }
 
             Spacer(minLength: 0)
-
-            // Read more link
-            Button {
-                // Read more action
-            } label: {
-                HStack(spacing: 4) {
-                    Text("Read more")
-                        .font(.system(size: 12, weight: .semibold))
-                    Image(systemName: "chevron.right")
-                        .font(.system(size: 10, weight: .semibold))
-                }
-                .foregroundColor(.primaryGreen)
-            }
         }
-        .padding(16)
+        .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(backgroundColor)
+        .background(Color.white)
         .cornerRadius(24)
     }
 }
@@ -400,4 +385,5 @@ private struct SeasonCard: View {
 
 #Preview {
     CareTipsView()
+        .environmentObject(AuthViewModel())
 }

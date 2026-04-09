@@ -15,7 +15,7 @@ struct LoginView: View {
 
                     // Logo
                     ZStack {
-                        RoundedRectangle(cornerRadius: 20)
+                        Circle()
                             .fill(Color.white)
                             .frame(width: 80, height: 80)
                             .shadow(color: .black.opacity(0.1), radius: 10, y: 4)

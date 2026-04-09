@@ -32,10 +32,11 @@ private let mockDiseaseProfiles: [DiseaseProfile] = [
         diseaseName: "Early Blight",
         healthScore: 0.42,
         treatments: [
-            Treatment(category: "Chemical Control", description: "Apply chlorothalonil or copper-based fungicide every 7-10 days. Ensure thorough leaf coverage, especially on lower canopy."),
-            Treatment(category: "Pruning", description: "Remove and destroy all infected lower leaves immediately. Prune to improve air circulation between plant stems."),
-            Treatment(category: "Soil Health", description: "Add 2-inch layer of organic mulch around the base to prevent soil splash. Supplement with calcium-rich compost."),
-            Treatment(category: "Follow-Up Scan", description: "Re-scan in 5-7 days to monitor disease progression. If health score drops below 30%, consider plant removal.")
+            Treatment(category: "Foliar Application", description: "Apply chlorothalonil or copper-based fungicide every 7-10 days. Ensure thorough leaf coverage, especially on the lower canopy where lesions first appear."),
+            Treatment(category: "Sanitation", description: "Remove and destroy all infected lower leaves immediately. Bag debris rather than composting to prevent reinfection through windborne spores."),
+            Treatment(category: "Soil Nutrition", description: "Top-dress with a calcium-rich compost and balanced fertilizer to bolster cell wall strength. Apply a 2-inch organic mulch layer to suppress soil splash."),
+            Treatment(category: "Irrigation Adjustment", description: "Switch to drip irrigation at the base of the plant and avoid wetting foliage. Water early in the morning so leaves dry quickly during the day."),
+            Treatment(category: "Future Monitoring", description: "Re-scan every 5-7 days to track lesion spread. If the health score drops below 30%, consider removing the plant to protect neighboring crops.")
         ]
     ),
     DiseaseProfile(
@@ -43,10 +44,11 @@ private let mockDiseaseProfiles: [DiseaseProfile] = [
         diseaseName: "Leaf Spot",
         healthScore: 0.614,
         treatments: [
-            Treatment(category: "Chemical Control", description: "Treat with neem oil spray (2 tbsp per gallon) weekly. Alternate with a baking soda solution to prevent resistance."),
-            Treatment(category: "Pruning", description: "Cut affected leaves at the stem junction. Sanitize pruning shears with 70% isopropyl alcohol between each cut."),
-            Treatment(category: "Soil Health", description: "Improve drainage around root zone. Apply balanced 10-10-10 fertilizer to strengthen plant immune response."),
-            Treatment(category: "Follow-Up Scan", description: "Monitor weekly for 3 weeks. Leaf spot typically resolves within 14-21 days with consistent treatment.")
+            Treatment(category: "Foliar Application", description: "Treat with neem oil spray (2 tbsp per gallon) weekly, alternating with a baking soda solution to prevent fungal resistance and protect new growth."),
+            Treatment(category: "Sanitation", description: "Cut affected leaves at the stem junction and rake up fallen debris around the base. Sanitize pruning shears with 70% isopropyl alcohol between each cut."),
+            Treatment(category: "Soil Nutrition", description: "Apply a balanced 10-10-10 fertilizer with added micronutrients to strengthen the plant's immune response. Mulch with composted bark to retain moisture."),
+            Treatment(category: "Irrigation Adjustment", description: "Water at the soil line in the morning hours and avoid overhead sprinklers entirely. Improve drainage around the root zone to prevent standing moisture."),
+            Treatment(category: "Future Monitoring", description: "Inspect weekly for three weeks. Leaf spot typically resolves within 14-21 days with consistent treatment, but recurrence is common in humid conditions.")
         ]
     ),
     DiseaseProfile(
@@ -54,10 +56,11 @@ private let mockDiseaseProfiles: [DiseaseProfile] = [
         diseaseName: "Powdery Mildew",
         healthScore: 0.736,
         treatments: [
-            Treatment(category: "Chemical Control", description: "Apply sulfur-based fungicide or potassium bicarbonate solution. Spray early morning when temperatures are below 90F."),
-            Treatment(category: "Pruning", description: "Thin dense foliage to increase sunlight penetration and air flow. Remove the most heavily coated leaves first."),
-            Treatment(category: "Soil Health", description: "Reduce overhead watering immediately. Switch to drip irrigation and water at the base only during early morning hours."),
-            Treatment(category: "Follow-Up Scan", description: "Re-scan in 10 days. Powdery mildew is cosmetic at this stage but can reduce yield if left untreated beyond 3 weeks.")
+            Treatment(category: "Foliar Application", description: "Apply sulfur-based fungicide or a potassium bicarbonate solution to coated leaves. Spray in the early morning when temperatures stay below 90F to avoid leaf burn."),
+            Treatment(category: "Sanitation", description: "Remove the most heavily coated leaves first and dispose of them off-site. Thin dense foliage to increase sunlight penetration and reduce humidity pockets."),
+            Treatment(category: "Soil Nutrition", description: "Side-dress with compost and a low-nitrogen fertilizer to avoid encouraging soft, susceptible new growth. Add silica to reinforce leaf surfaces."),
+            Treatment(category: "Irrigation Adjustment", description: "Stop overhead watering immediately and switch to drip irrigation at the base. Water early so any incidental leaf moisture evaporates well before nightfall."),
+            Treatment(category: "Future Monitoring", description: "Re-scan in 10 days to gauge spread. Powdery mildew is cosmetic at this stage but can significantly reduce yield if left untreated beyond three weeks.")
         ]
     ),
     DiseaseProfile(
@@ -65,10 +68,11 @@ private let mockDiseaseProfiles: [DiseaseProfile] = [
         diseaseName: nil,
         healthScore: 0.95,
         treatments: [
-            Treatment(category: "Chemical Control", description: "No chemical treatment needed. Consider a preventative neem oil spray every 2 weeks during humid seasons."),
-            Treatment(category: "Pruning", description: "Pinch growing tips regularly to encourage bushy growth. Harvest from the top down to maintain plant vigor."),
-            Treatment(category: "Soil Health", description: "Maintain slightly acidic soil pH (6.0-7.0). Top-dress with worm castings monthly for sustained nutrient release."),
-            Treatment(category: "Follow-Up Scan", description: "Routine scan recommended in 30 days. Your plant is in excellent health with no signs of disease or pest damage.")
+            Treatment(category: "Foliar Application", description: "No active treatment is needed. Consider a preventative neem oil mist every 2 weeks during humid seasons to deter pests and early fungal pressure."),
+            Treatment(category: "Sanitation", description: "Pinch growing tips regularly to encourage bushy growth and remove any yellowing leaves promptly. Harvest from the top down to maintain plant vigor."),
+            Treatment(category: "Soil Nutrition", description: "Maintain a slightly acidic soil pH (6.0-7.0). Top-dress with worm castings monthly for sustained, gentle nutrient release that supports flavor development."),
+            Treatment(category: "Irrigation Adjustment", description: "Water deeply when the top inch of soil feels dry and avoid letting the plant wilt between waterings. Morning watering keeps foliage dry through the day."),
+            Treatment(category: "Future Monitoring", description: "Schedule a routine scan in 30 days to maintain baseline health. Your plant is in excellent condition with no signs of disease or pest damage at this time.")
         ]
     )
 ]

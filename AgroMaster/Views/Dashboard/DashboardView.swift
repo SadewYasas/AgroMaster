@@ -3,7 +3,7 @@ import SwiftUI
 struct DashboardView: View {
     @Binding var selectedTab: Int
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State private var showSignOutConfirmation = false
+    @State private var showSettings = false
 
     // MARK: - Greeting Logic
 
@@ -43,17 +43,9 @@ struct DashboardView: View {
             .padding(.bottom, 40)
         }
         .background(Color.appBackground.ignoresSafeArea())
-        .confirmationDialog(
-            "Sign Out",
-            isPresented: $showSignOutConfirmation,
-            titleVisibility: .visible
-        ) {
-            Button("Sign Out", role: .destructive) {
-                authViewModel.signOut()
-            }
-            Button("Cancel", role: .cancel) {}
-        } message: {
-            Text("Are you sure you want to sign out of AgroMaster?")
+        .sheet(isPresented: $showSettings) {
+            SettingsView()
+                .environmentObject(authViewModel)
         }
     }
 
@@ -64,7 +56,7 @@ struct DashboardView: View {
             HStack(alignment: .top) {
                 Spacer()
                 Button {
-                    showSignOutConfirmation = true
+                    showSettings = true
                 } label: {
                     Image(systemName: "person.crop.circle.fill")
                         .resizable()
@@ -101,7 +93,7 @@ struct DashboardView: View {
 
     private var scanPlantCard: some View {
         Button {
-            selectedTab = 2
+            selectedTab = 1
         } label: {
             ZStack(alignment: .bottomTrailing) {
                 // Background plant imagery
@@ -178,7 +170,7 @@ struct DashboardView: View {
 
     private var viewHistoryCard: some View {
         Button {
-            selectedTab = 3
+            selectedTab = 2
         } label: {
             VStack(alignment: .leading, spacing: 14) {
                 // Icon container
@@ -220,7 +212,7 @@ struct DashboardView: View {
 
     private var plantCareTipsCard: some View {
         Button {
-            selectedTab = 1
+            selectedTab = 3
         } label: {
             VStack(alignment: .leading, spacing: 14) {
                 // Icon container

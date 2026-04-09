@@ -10,6 +10,8 @@ struct ReminderSettingsView: View {
     @AppStorage("preferredHour") private var preferredHour = 8
     @AppStorage("preferredMinute") private var preferredMinute = 0
 
+    @State private var showTimePicker = false
+
     private var preferredTime: Binding<Date> {
         Binding<Date>(
             get: {
@@ -38,13 +40,16 @@ struct ReminderSettingsView: View {
                     header
                     masterToggleCard
                     frequencySection
-                    timingSection
+                    proTipCard
                     preferredTimeSection
                     Spacer(minLength: 32)
                 }
             }
         }
         .navigationBarBackButtonHidden(true)
+        .sheet(isPresented: $showTimePicker) {
+            timePickerSheet
+        }
     }
 
     // MARK: - Header
@@ -55,9 +60,9 @@ struct ReminderSettingsView: View {
                 Button {
                     dismiss()
                 } label: {
-                    Image(systemName: "arrow.left")
+                    Image(systemName: "line.3.horizontal")
                         .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.textPrimary)
+                        .foregroundColor(.primaryGreen)
                         .frame(width: 40, height: 40)
                         .background(Color.surfaceLight)
                         .cornerRadius(12)
@@ -102,19 +107,19 @@ struct ReminderSettingsView: View {
         HStack(spacing: 16) {
             ZStack {
                 Circle()
-                    .fill(Color.primaryGreen.opacity(0.15))
-                    .frame(width: 48, height: 48)
-                Image(systemName: "leaf.fill")
-                    .font(.system(size: 20, weight: .semibold))
+                    .fill(Color.lightGreenTint)
+                    .frame(width: 56, height: 56)
+                Image(systemName: "bell.fill")
+                    .font(.system(size: 22, weight: .semibold))
                     .foregroundColor(.primaryGreen)
             }
 
             VStack(alignment: .leading, spacing: 4) {
-                Text("Smart Alerts")
+                Text("Enable reminders")
                     .font(.heading3)
                     .foregroundColor(.textPrimary)
 
-                Text("Receive timely reminders for watering, treatments, and seasonal tasks.")
+                Text("Get real-time alerts for plant care")
                     .font(.bodySmall)
                     .foregroundColor(.textSecondary)
                     .lineSpacing(2)
@@ -137,7 +142,7 @@ struct ReminderSettingsView: View {
         .padding(24)
         .background(
             RoundedRectangle(cornerRadius: 24)
-                .fill(Color.surfaceLight)
+                .fill(Color.white)
         )
         .padding(.horizontal, 20)
     }
@@ -224,45 +229,45 @@ struct ReminderSettingsView: View {
         .buttonStyle(.plain)
     }
 
-    // MARK: - Timing Section
+    // MARK: - Pro Tip Card
 
-    private var timingSection: some View {
+    private var proTipCard: some View {
         VStack(alignment: .leading, spacing: 12) {
-            HStack(spacing: 12) {
-                ZStack {
-                    Circle()
-                        .fill(Color.secondaryGreen.opacity(0.15))
-                        .frame(width: 44, height: 44)
-                    Image(systemName: "calendar.badge.clock")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundColor(.secondaryGreen)
-                }
+            Image(systemName: "lightbulb.fill")
+                .font(.system(size: 22, weight: .semibold))
+                .foregroundColor(.accentBrown)
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Timing")
-                        .font(.heading4)
-                        .foregroundColor(.textPrimary)
+            Text("Pro Tip")
+                .font(.heading3)
+                .foregroundColor(.accentBrown)
 
-                    Text("Notifications are delivered based on your selected frequency and preferred time.")
-                        .font(.bodySmall)
-                        .foregroundColor(.textSecondary)
-                        .lineSpacing(2)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
-            }
+            Text("Early morning alerts allow you to plan irrigation before peak heat hours.")
+                .font(.bodySmall)
+                .foregroundColor(.accentBrown.opacity(0.85))
+                .lineSpacing(3)
+                .fixedSize(horizontal: false, vertical: true)
 
             Button {
-                // Calendar view action
+                // TODO: Learn more action
             } label: {
-                Text("View calendar >")
-                    .font(.bodySmall.weight(.semibold))
-                    .foregroundColor(.primaryGreen)
+                HStack(spacing: 6) {
+                    Text("LEARN MORE")
+                        .font(.label)
+                        .tracking(2)
+                        .foregroundColor(.accentBrown)
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundColor(.accentBrown)
+                }
             }
+            .buttonStyle(.plain)
+            .padding(.top, 8)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
         .padding(24)
         .background(
             RoundedRectangle(cornerRadius: 24)
-                .fill(Color.surfaceLight)
+                .fill(Color.coral)
         )
         .padding(.horizontal, 20)
     }
@@ -275,10 +280,71 @@ struct ReminderSettingsView: View {
                 .font(.heading4)
                 .foregroundColor(.textPrimary)
 
-            Text("Choose the time of day you'd like to receive your reminders.")
+            Text("Select when you'd like to receive your morning summary.")
                 .font(.bodySmall)
                 .foregroundColor(.textSecondary)
                 .lineSpacing(2)
+
+            Button {
+                showTimePicker = true
+            } label: {
+                HStack {
+                    Text(preferredTimeDisplayString)
+                        .font(.bodyRegular)
+                        .foregroundColor(.textPrimary)
+
+                    Spacer()
+
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 14))
+                        .foregroundColor(.textSecondary)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 14)
+                .background(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.white)
+                )
+            }
+            .buttonStyle(.plain)
+        }
+        .padding(24)
+        .background(
+            RoundedRectangle(cornerRadius: 24)
+                .fill(Color.surfaceLight)
+        )
+        .padding(.horizontal, 20)
+    }
+
+    private var preferredTimeDisplayString: String {
+        var components = DateComponents()
+        components.hour = preferredHour
+        components.minute = preferredMinute
+        let date = Calendar.current.date(from: components) ?? Date()
+
+        let formatter = DateFormatter()
+        formatter.dateFormat = "hh:mm a"
+        let timeString = formatter.string(from: date)
+
+        let label: String
+        switch preferredHour {
+        case 5...11: label = "Sunrise"
+        case 12...16: label = "Midday"
+        case 17...20: label = "Evening"
+        default: label = "Night"
+        }
+
+        return "\(timeString) (\(label))"
+    }
+
+    // MARK: - Time Picker Sheet
+
+    private var timePickerSheet: some View {
+        VStack(spacing: 24) {
+            Text("Preferred Time")
+                .font(.heading3)
+                .foregroundColor(.textPrimary)
+                .padding(.top, 24)
 
             DatePicker(
                 "Reminder Time",
@@ -287,18 +353,26 @@ struct ReminderSettingsView: View {
             )
             .datePickerStyle(.wheel)
             .labelsHidden()
-            .frame(maxWidth: .infinity)
-            .background(
-                RoundedRectangle(cornerRadius: 24)
-                    .fill(.white)
-            )
+
+            Button {
+                showTimePicker = false
+            } label: {
+                Text("Done")
+                    .font(.heading4)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 16)
+                    .background(
+                        RoundedRectangle(cornerRadius: 16)
+                            .fill(Color.primaryGreen)
+                    )
+            }
+            .buttonStyle(.plain)
+            .padding(.horizontal, 24)
+
+            Spacer()
         }
-        .padding(24)
-        .background(
-            RoundedRectangle(cornerRadius: 24)
-                .fill(Color.surfaceLight)
-        )
-        .padding(.horizontal, 20)
+        .presentationDetents([.medium])
     }
 
     // MARK: - Notification Logic

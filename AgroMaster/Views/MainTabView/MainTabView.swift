@@ -11,27 +11,27 @@ struct MainTabView: View {
                 }
                 .tag(0)
 
-            CareTipsView()
+            ScanView()
                 .tabItem {
-                    Label("Tips", systemImage: "leaf")
+                    Label("Scan", systemImage: "camera.viewfinder")
                 }
                 .tag(1)
 
-            ScanView()
+            HistoryView()
                 .tabItem {
-                    Label("Scan", systemImage: "camera.fill")
+                    Label("History", systemImage: "clock.arrow.circlepath")
                 }
                 .tag(2)
 
-            HistoryView()
+            CareTipsView()
                 .tabItem {
-                    Label("History", systemImage: "clock")
+                    Label("Tips", systemImage: "leaf.fill")
                 }
                 .tag(3)
 
-            SettingsView()
+            NearbySupportView()
                 .tabItem {
-                    Label("Settings", systemImage: "gearshape")
+                    Label("Support", systemImage: "map.fill")
                 }
                 .tag(4)
         }

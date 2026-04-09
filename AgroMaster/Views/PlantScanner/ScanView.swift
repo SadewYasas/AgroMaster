@@ -3,7 +3,9 @@ import PhotosUI
 
 struct ScanView: View {
     @StateObject var viewModel = CameraViewModel()
+    @EnvironmentObject var authViewModel: AuthViewModel
     @Environment(\.dismiss) private var dismiss
+    @State private var showSettings = false
 
     var body: some View {
         NavigationStack {
@@ -38,6 +40,10 @@ struct ScanView: View {
                     await viewModel.handlePickerSelection(newItem)
                 }
             }
+            .sheet(isPresented: $showSettings) {
+                SettingsView()
+                    .environmentObject(authViewModel)
+            }
         }
     }
 
@@ -58,9 +64,13 @@ struct ScanView: View {
 
             Spacer()
 
-            Image(systemName: "person.crop.circle.fill")
-                .font(.system(size: 36))
-                .foregroundColor(.surfaceDark)
+            Button {
+                showSettings = true
+            } label: {
+                Image(systemName: "person.crop.circle.fill")
+                    .font(.system(size: 36))
+                    .foregroundColor(.surfaceDark)
+            }
         }
         .padding(.top, 8)
     }
@@ -204,8 +214,9 @@ struct ScanView: View {
                     Image(systemName: "sparkle.magnifyingglass")
                         .font(.system(size: 18, weight: .semibold))
                 }
-                Text(viewModel.isAnalyzing ? "Analyzing..." : "Analyze")
+                Text(viewModel.isAnalyzing ? "ANALYZING..." : "ANALYZE")
                     .font(.button)
+                    .tracking(1.5)
             }
             .frame(maxWidth: .infinity, minHeight: 56)
             .foregroundColor(.white)
@@ -291,4 +302,5 @@ struct ScanView: View {
 
 #Preview {
     ScanView()
+        .environmentObject(AuthViewModel())
 }

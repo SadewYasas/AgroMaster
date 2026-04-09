@@ -99,7 +99,7 @@ struct HistoryView: View {
             // Total scans card
             HStack(spacing: 0) {
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("PLANT SCANS COMPLETED")
+                    Text("YOUR DIGITAL CROP ARCHIVE")
                         .font(.label)
                         .tracking(1.5)
                         .foregroundColor(.accentBrown)

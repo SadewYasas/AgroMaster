@@ -73,7 +73,7 @@ struct ScanResultView: View {
                 .fill(Color.primaryGreen)
                 .frame(width: 8, height: 8)
 
-            Text("Analyzing Complete")
+            Text("ANALYSIS COMPLETE")
                 .font(.label)
                 .foregroundColor(.white)
         }
@@ -105,15 +105,16 @@ struct ScanResultView: View {
 
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("Overall Plant Condition")
+                    Text("CONFIDENCE SCORE")
                         .font(.label)
-                        .foregroundColor(.textSecondary)
+                        .tracking(1.5)
+                        .foregroundColor(.primaryGreen)
 
                     Spacer()
 
                     Text(healthPercentageText)
                         .font(.heading3)
-                        .foregroundColor(healthColor)
+                        .foregroundColor(.primaryGreen)
                 }
 
                 healthMeterBar
@@ -182,52 +183,48 @@ struct ScanResultView: View {
 
     private var treatmentSection: some View {
         VStack(alignment: .leading, spacing: 20) {
-            HStack(spacing: 12) {
-                Image(systemName: "shield.checkered")
+            HStack(spacing: 10) {
+                Image(systemName: "leaf.circle.fill")
                     .font(.system(size: 22))
                     .foregroundColor(.primaryGreen)
 
-                Text("Recommended Treatment Plan")
+                Text("Treatment Recommendations")
                     .font(.heading3)
-                    .foregroundColor(.white)
+                    .foregroundColor(.textPrimary)
             }
 
-            ForEach(result.treatments) { treatment in
-                treatmentCard(treatment: treatment)
+            VStack(alignment: .leading, spacing: 18) {
+                ForEach(result.treatments) { treatment in
+                    treatmentRow(treatment: treatment)
+                }
             }
         }
-        .padding(24)
-        .padding(.bottom, 16)
-        .background(
-            RoundedRectangle(cornerRadius: 32)
-                .fill(Color.textPrimary)
-        )
-        .padding(.top, -16)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 24)
+        .padding(.bottom, 32)
     }
 
-    private func treatmentCard(treatment: Treatment) -> some View {
-        HStack(alignment: .top, spacing: 14) {
+    private func treatmentRow(treatment: Treatment) -> some View {
+        HStack(alignment: .top, spacing: 12) {
             Circle()
                 .fill(Color.primaryGreen)
-                .frame(width: 10, height: 10)
+                .frame(width: 8, height: 8)
                 .padding(.top, 6)
 
             VStack(alignment: .leading, spacing: 6) {
-                Text(treatment.category)
+                Text(treatment.category.uppercased())
                     .font(.label)
-                    .foregroundColor(.primaryGreen)
+                    .tracking(1.2)
+                    .foregroundColor(.textPrimary)
 
                 Text(treatment.description)
                     .font(.bodySmall)
-                    .foregroundColor(.white.opacity(0.75))
+                    .foregroundColor(.textSecondary)
                     .lineSpacing(3)
                     .fixedSize(horizontal: false, vertical: true)
             }
         }
-        .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white.opacity(0.08))
-        .cornerRadius(16)
     }
 
     // MARK: - Info Chip

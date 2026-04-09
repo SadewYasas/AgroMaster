@@ -19,6 +19,9 @@ struct NearbySupportView: View {
                         .zIndex(1)
                     resultsSection
                         .padding(.top, -12)
+                    onSiteServiceBanner
+                        .padding(.horizontal, 24)
+                        .padding(.top, 32)
                 }
             }
         }
@@ -236,6 +239,61 @@ struct NearbySupportView: View {
 
             Spacer(minLength: 40)
         }
+    }
+
+    // MARK: - On-Site Service Banner
+
+    private var onSiteServiceBanner: some View {
+        ZStack(alignment: .topTrailing) {
+            // Decorative subtle circle in upper-right
+            Circle()
+                .fill(Color.white.opacity(0.1))
+                .frame(width: 140, height: 140)
+                .offset(x: 40, y: -40)
+
+            VStack(alignment: .leading, spacing: 12) {
+                Text("ON-SITE SERVICE")
+                    .font(.label)
+                    .tracking(2)
+                    .foregroundColor(.lightGreenTint)
+                    .textCase(.uppercase)
+
+                Text("Need On-Site Analysis?")
+                    .font(.heading2)
+                    .foregroundColor(.white)
+
+                Text("Schedule a professional agronomist visit through Agricare Support. Our experts provide precise on-ground diagnostics and tailored recovery plans.")
+                    .font(.bodySmall)
+                    .foregroundColor(.lightGreenTint.opacity(0.85))
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    // TODO: wire up to support form
+                } label: {
+                    HStack(spacing: 6) {
+                        Text("Request Field Visit")
+                            .font(.button)
+                        Image(systemName: "arrow.right")
+                            .font(.system(size: 14, weight: .semibold))
+                    }
+                    .foregroundColor(.primaryGreen)
+                    .padding(.horizontal, 20)
+                    .padding(.vertical, 12)
+                    .background(
+                        Capsule()
+                            .fill(.white)
+                            .shadow(color: .black.opacity(0.1), radius: 8, x: 0, y: 4)
+                    )
+                }
+                .buttonStyle(.plain)
+                .padding(.top, 4)
+            }
+            .padding(24)
+            .frame(maxWidth: .infinity, alignment: .leading)
+        }
+        .background(Color.primaryGreen)
+        .clipShape(RoundedRectangle(cornerRadius: 32))
     }
 
     // MARK: - Helpers
