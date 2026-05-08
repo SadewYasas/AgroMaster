@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		90DDAC092FADA9ED00184FAC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 90DDAC082FADA9ED00184FAC /* FirebaseFirestore */; };
+		90DDAC0B2FADAA0B00184FAC /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 90DDAC0A2FADAA0B00184FAC /* FirebaseCore */; };
+		90DDAC0D2FADAA1200184FAC /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 90DDAC0C2FADAA1200184FAC /* FirebaseAuth */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		9FD0D7C92F877AB50019E869 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +30,28 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		90DDA8A62FAD9FFF00184FAC /* AgroMaster.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = AgroMaster.xcodeproj; sourceTree = "<group>"; };
 		9FD0D7BB2F877AB40019E869 /* AgroMaster.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AgroMaster.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FD0D7C82F877AB50019E869 /* AgroMasterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgroMasterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9FD0D7D22F877AB60019E869 /* AgroMasterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AgroMasterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		90DDA9112FADA0AC00184FAC /* Exceptions for "AgroMaster" folder in "AgroMaster" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 9FD0D7BA2F877AB40019E869 /* AgroMaster */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		9FD0D7BD2F877AB40019E869 /* AgroMaster */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				90DDA9112FADA0AC00184FAC /* Exceptions for "AgroMaster" folder in "AgroMaster" target */,
+			);
 			path = AgroMaster;
 			sourceTree = "<group>";
 		};
@@ -52,6 +72,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90DDAC0B2FADAA0B00184FAC /* FirebaseCore in Frameworks */,
+				90DDAC0D2FADAA1200184FAC /* FirebaseAuth in Frameworks */,
+				90DDAC092FADA9ED00184FAC /* FirebaseFirestore in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,12 +95,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		90DDA8E62FAD9FFF00184FAC /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
+		90DDAC072FADA9ED00184FAC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9FD0D7B22F877AB40019E869 = {
 			isa = PBXGroup;
 			children = (
 				9FD0D7BD2F877AB40019E869 /* AgroMaster */,
 				9FD0D7CB2F877AB50019E869 /* AgroMasterTests */,
 				9FD0D7D52F877AB60019E869 /* AgroMasterUITests */,
+				90DDAC072FADA9ED00184FAC /* Frameworks */,
 				9FD0D7BC2F877AB40019E869 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -112,6 +148,9 @@
 			);
 			name = AgroMaster;
 			packageProductDependencies = (
+				90DDAC082FADA9ED00184FAC /* FirebaseFirestore */,
+				90DDAC0A2FADAA0B00184FAC /* FirebaseCore */,
+				90DDAC0C2FADAA1200184FAC /* FirebaseAuth */,
 			);
 			productName = AgroMaster;
 			productReference = 9FD0D7BB2F877AB40019E869 /* AgroMaster.app */;
@@ -171,7 +210,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 2630;
-				LastUpgradeCheck = 2630;
+				LastUpgradeCheck = 2640;
 				TargetAttributes = {
 					9FD0D7BA2F877AB40019E869 = {
 						CreatedOnToolsVersion = 26.3;
@@ -195,9 +234,18 @@
 			);
 			mainGroup = 9FD0D7B22F877AB40019E869;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				90DDAC062FADA9C600184FAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 9FD0D7BC2F877AB40019E869 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 90DDA8E62FAD9FFF00184FAC /* Products */;
+					ProjectRef = 90DDA8A62FAD9FFF00184FAC /* AgroMaster.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				9FD0D7BA2F877AB40019E869 /* AgroMaster */,
@@ -327,6 +375,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -383,6 +432,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -574,6 +624,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		90DDAC062FADA9C600184FAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.13.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		90DDAC082FADA9ED00184FAC /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90DDAC062FADA9C600184FAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		90DDAC0A2FADAA0B00184FAC /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90DDAC062FADA9C600184FAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		90DDAC0C2FADAA1200184FAC /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 90DDAC062FADA9C600184FAC /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 9FD0D7B32F877AB40019E869 /* Project object */;
 }

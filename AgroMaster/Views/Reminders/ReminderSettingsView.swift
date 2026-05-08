@@ -42,6 +42,7 @@ struct ReminderSettingsView: View {
                     frequencySection
                     proTipCard
                     preferredTimeSection
+                    demoNotificationButton
                     Spacer(minLength: 32)
                 }
             }
@@ -375,6 +376,29 @@ struct ReminderSettingsView: View {
         .presentationDetents([.medium])
     }
 
+    // MARK: - Demo Notification
+
+    private var demoNotificationButton: some View {
+        Button {
+            scheduleTestNotification()
+        } label: {
+            HStack {
+                Image(systemName: "paperplane.fill")
+                Text("Send Test Notification (5s Delay)")
+            }
+            .font(.heading4)
+            .foregroundColor(.white)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.accentBrown)
+            )
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 20)
+    }
+
     // MARK: - Notification Logic
 
     private func requestNotificationPermission() {
@@ -424,6 +448,31 @@ struct ReminderSettingsView: View {
         center.add(request) { error in
             if let error = error {
                 print("Failed to schedule notification: \(error.localizedDescription)")
+            }
+        }
+    }
+
+    private func scheduleTestNotification() {
+        let center = UNUserNotificationCenter.current()
+        center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
+            guard granted else { return }
+
+            let content = UNMutableNotificationContent()
+            content.title = "💧 Watering System On"
+            content.body = "Your automated watering system has just been activated. Your plants are getting hydrated!"
+            content.sound = .default
+
+            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+            let request = UNNotificationRequest(
+                identifier: "demo_reminder",
+                content: content,
+                trigger: trigger
+            )
+
+            center.add(request) { error in
+                if let error = error {
+                    print("Failed to schedule test notification: \(error.localizedDescription)")
+                }
             }
         }
     }
